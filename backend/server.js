@@ -12,6 +12,9 @@ dbConnect();
 server.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 
 server.use("/api",require("./routes/userRoutes"))
+server.use('/api' ,require('./routes/serviceRoutes'))
+server.use('/api',require("./routes/bookingRoutes"))
+
 
 
 

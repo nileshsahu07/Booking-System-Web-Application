@@ -15,9 +15,12 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/signup" element={<Signup/>}></Route>
-        <Route path="/" element={<Homepage/>}></Route>
         <Route element={<PrivateRoute allowedRole={["admin"]}/>}>
           <Route path="/dashboard" element={<Dashboard/>}></Route>
+        </Route>
+
+        <Route element={<PrivateRoute allowedRole={["user"]}/>}>
+          <Route path="/" element={<Homepage/>}></Route>
         </Route>
       </Routes>
     </>
