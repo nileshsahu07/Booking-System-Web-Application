@@ -65,8 +65,10 @@ exports.login = async(req,res,next)=>{
 
 exports.getUsers = async(req,res,next)=>{
     try {
-      const users = await User.find({ role: { $ne: 'admin' } }) //iska matlab not equal to admin matlab admin nhi aayega isme
+    //   const users = await User.find({ role: { $ne: 'admin' } }) //iska matlab not equal to admin matlab admin nhi aayega isme
     //  console.log(users)
+
+    const users = await User.find()
   
      if(!users){
          const error = new Error('Users not found');
@@ -80,5 +82,30 @@ exports.getUsers = async(req,res,next)=>{
      })
     } catch (error) {
        next(error)
+    }
+  }
+
+
+  exports.deactivateUser = async(req,res,next)=>{
+    try{
+        const {id} = req.params;
+        const user = await User.findById(id);
+
+        if(!users){
+            const error = new Error('Users not found');
+            error.statusCode = 404 ;
+            throw error
+        }
+
+        user.isActive = false
+        // await user.save()
+        console.log(user)
+
+        res.status(200).json({
+            user
+        })
+
+    }catch(error){
+
     }
   }

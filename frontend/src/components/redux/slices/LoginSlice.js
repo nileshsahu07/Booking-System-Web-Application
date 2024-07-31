@@ -31,6 +31,7 @@ const loginSlice = createSlice({
             state.loading = 'true',
             state.token = null ,
             state.role = null,
+            state.name = null,
             localStorage.removeItem('token')
             localStorage.removeItem('role')         
         }

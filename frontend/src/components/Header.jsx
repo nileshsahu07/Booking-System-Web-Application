@@ -1,10 +1,17 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
-// import { useDispatch} from 'react-redux'
+import { useDispatch} from 'react-redux'
 import { Link } from 'react-router-dom'
-import Cards from './Cards'
-// import {logout} from "./redux/slices/LoginSlice"
+import {logout} from "./redux/slices/LoginSlice"
+
+export default function Header() {
+
+  const dispatch = useDispatch()
+
+  const handleLogout = ()=>{
+    dispatch(logout())
+}
 
 const name = localStorage.getItem('name')
 const user = {
@@ -14,30 +21,19 @@ const user = {
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Services', url: '/', current: false },
+  { name: 'Home', url: '/', current: true },
+  { name: 'Services', url: '/services', current: false },
   { name: 'Contact Us', url: '/contact', current: false },
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
   { name: 'Settings', href: '#' },
-  { name: 'Sign out', url: '/login' },
+  { name: 'Sign out', url: '/login' ,fun: handleLogout},
 ]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-
-export default function Header(props) {
-  
-  const servicesForCustomer = props
-  const allCards =  servicesForCustomer.cardData
-  // console.log(allCards)
-//  const dispatch = useDispatch()
-//   useSelector((state)=>state)
-
 
   return (
     <>
@@ -66,9 +62,9 @@ export default function Header(props) {
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
                         {navigation.map((item) => (
-                          <a
+                          <Link
                             key={item.name}
-                            href={item.href}
+                            to={item.url}
                             className={classNames(
                               item.current
                                 ? 'bg-gray-900 text-white'
@@ -78,7 +74,7 @@ export default function Header(props) {
                             aria-current={item.current ? 'page' : undefined}
                           >
                             {item.name}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -113,7 +109,7 @@ export default function Header(props) {
                               {({ focus }) => (
 
                                 <Link
-                                  to={item.url}
+                                  to={item.fun}
                                   className={classNames(
                                     focus ? 'bg-gray-100' : '',
                                     'block px-4 py-2 text-sm text-gray-700',
@@ -183,7 +179,7 @@ export default function Header(props) {
                       <DisclosureButton
                         key={item.name}
                         as="a"
-                        href={item.href}
+                        url={item.fun}
                         className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                       >
                         {item.name}
@@ -203,12 +199,7 @@ export default function Header(props) {
           
         </header>
         <main>
-          <div className="mx-auto max-w-7xl  bg-black  px-4 py-6 sm:px-6 lg:px-8">
-          {allCards && allCards.map((res)=>(
-                <>
-                <Cards cardData = {res}/>
-                </>
-            ))}
+          <div className="mx-auto max-w-7xl  px-4 py-6 sm:px-6 lg:px-8">
           {/* <Cards/> */}
           </div>
         </main>
