@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import {useDispatch} from "react-redux"
-import {SignUp} from "./redux/slices/SignupSlice.js"
+import {SignUp} from "../../redux/slices/SignupSlice"
 
 // import "./Login.css"
 // import {FaUser, FaLock,} from "react-icons/fa"

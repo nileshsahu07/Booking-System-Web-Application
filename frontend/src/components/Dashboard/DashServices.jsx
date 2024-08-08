@@ -1,6 +1,6 @@
 import { DataGrid } from '@mui/x-data-grid';
 import { useSelector , useDispatch} from 'react-redux';
-import { createServices, fetchService, deleteService, updateService } from '../redux/slices/servicesSlice';
+import { createServices, fetchService, deleteService, updateService } from '../../redux/slices/servicesSlice';
 import { useEffect,useState } from 'react';
 import { MdOutlineEdit } from "react-icons/md";
 import { RiDeleteBin5Line } from "react-icons/ri";

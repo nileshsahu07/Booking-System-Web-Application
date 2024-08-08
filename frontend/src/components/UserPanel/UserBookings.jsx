@@ -2,7 +2,7 @@ import { useSelector , useDispatch} from "react-redux"
 import Footer from "./Footer"
 import Header from "./Header"
 import { useEffect } from "react"
-import { getBooking } from "./redux/slices/BookingSlice"
+import { getBooking } from "../../redux/slices/BookingSlice"
 // import { jwtDecode } from "jwt-decode"
 
 

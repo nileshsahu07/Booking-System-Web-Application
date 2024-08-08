@@ -1,6 +1,6 @@
 import {  useDispatch} from "react-redux";
 import { RiLogoutCircleLine } from "react-icons/ri";
-import { logout } from "../redux/slices/LoginSlice";
+import { logout } from "../../redux/slices/LoginSlice";
 import { useNavigate } from "react-router-dom";
 // import { io } from 'socket.io-client';
 // import {useEffect } from 'react'

@@ -3,7 +3,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import './Datagrid.css';
 import { useSelector , useDispatch} from 'react-redux';
 import { useEffect } from 'react';
-import { getBooking } from '../redux/slices/BookingSlice';
+import { getBooking } from '../../redux/slices/BookingSlice';
 
 function Bookings() {
 

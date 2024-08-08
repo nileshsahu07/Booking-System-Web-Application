@@ -3,7 +3,7 @@ import "./Login.css"
 // import {FaUser, FaLock, } from "react-icons/fa"
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "./redux/slices/LoginSlice";
+import { login } from "../../redux/slices/LoginSlice";
 import {CSpinner} from "@coreui/react"
 
 

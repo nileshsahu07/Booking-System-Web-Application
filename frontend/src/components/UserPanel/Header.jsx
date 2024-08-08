@@ -3,7 +3,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 import { useDispatch} from 'react-redux'
 import { Link } from 'react-router-dom'
-import {logout} from "./redux/slices/LoginSlice"
+import {logout} from "../../redux/slices/LoginSlice"
 import { useNavigate } from "react-router-dom";
 import { Typography } from '@mui/material'
 

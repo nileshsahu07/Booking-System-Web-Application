@@ -3,8 +3,8 @@ import React, { useEffect } from 'react';
 import { PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
 import { Box, Typography, Card, CardContent } from '@mui/material';
 import { useSelector  , useDispatch} from 'react-redux';
-import { fetchService } from '../redux/slices/servicesSlice';
-import { fetchUsers } from '../redux/slices/userSlice';
+import { fetchService } from '../../redux/slices/servicesSlice';
+import { fetchUsers } from '../../redux/slices/userSlice';
 
 function Statistics() {
   const { users } = useSelector((state) => state.users);

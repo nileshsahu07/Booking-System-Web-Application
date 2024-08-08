@@ -1,7 +1,7 @@
 import Header from "./Header";
 import {useEffect, useState} from "react"
-import { fetchService } from "./redux/slices/servicesSlice";
-import {createBooking} from "./redux/slices/BookingSlice";
+import { fetchService } from "../../redux/slices/servicesSlice";
+import {createBooking} from "../../redux/slices/BookingSlice";
 import {useDispatch,useSelector} from "react-redux"
 import Footer from "./Footer";
 import Box from "@mui/material/Box"

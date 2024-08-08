@@ -2,7 +2,7 @@ import  { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { DataGrid } from '@mui/x-data-grid';
 import { Chip } from '@mui/material';
-import { fetchUsers, DeactivateUser, activateUser } from '../redux/slices/userSlice';
+import { fetchUsers, DeactivateUser, activateUser } from '../../redux/slices/userSlice';
 import './Datagrid.css';
 import {Button} from '@mui/material';
 
