@@ -7,15 +7,15 @@ const initialState = {
     error:null
 }
 
-const fetchUsers = createAsyncThunk('users/fetchUsers' , async(_ ,{rejectWithValue})=>{
+ const fetchUsers = createAsyncThunk('users/fetchUsers' , async(_ ,{rejectWithValue})=>{
     try{
         const token = localStorage.getItem('token')
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/all_users`,
-            {
-                headers:{
-                  Authorization:  `Bearer ${token}`
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/all_users`,
+                {
+                    headers:{
+                    Authorization:  `Bearer ${token}`
+                    }
                 }
-              }
         )
         return response.data.users;
     }

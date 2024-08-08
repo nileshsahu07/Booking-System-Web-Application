@@ -2,6 +2,9 @@
 import NavLink from './NavLink';
 import { LuUsers } from "react-icons/lu";
 import { RiAlignItemLeftLine } from "react-icons/ri";
+import { BsClipboardData } from "react-icons/bs";
+import { TfiDashboard } from "react-icons/tfi";
+
 
 function SideNav() {
   return (
@@ -11,9 +14,10 @@ function SideNav() {
       <h1 className='text-md'>Booking</h1>  
       </div>
       <nav className="flex-1 px-4 py-6 space-y-2">
-          <NavLink to="/dashboard" text="Dashboard" icon={<LuUsers/>}/>
+          <NavLink to="/dashboard" text="Dashboard" icon={<TfiDashboard />}/>
           <NavLink to="/dashboard/dashServices" text="Services" icon={<RiAlignItemLeftLine/>} />
         <NavLink to="/dashboard/users" text="Users" icon={<LuUsers/>}/>
+        <NavLink to="/dashboard/bookings" text="Bookings" icon={<BsClipboardData />}/>
       
        
       

@@ -4,11 +4,15 @@ const jwt = require("jsonwebtoken")
 
 exports.signup = async(req,res,next)=>{
     try{
-        // console.log(req.body)
         const {name,email,password,role} = req.body
 
         const existingUser = await User.find({email})
-        // console.log('existingUser' , existingUser)
+
+        // if(existingUser){
+        //     const error = new Error('You are already registered with this email, Please try again with new')
+        //     error.statuscode = 400
+        //     throw error 
+        // }
 
         const user = await User.create(req.body)
 
@@ -27,21 +31,24 @@ exports.login = async(req,res,next)=>{
     try{
         const {email,password} = req.body
         const user = await User.find({email})
-        // console.log(user)
-        // console.log(user[0].password)
-
-        //check if user exist
+        
         if(!user){
-            const error = new Error('user is not ragistered', 'please ragister first')
+            const error = new Error('user is not registered', 'please register first')
             error.statuscode = 400
             throw error 
         }
-            const MatchPassword = await bcrypt.compare(password, user[0].password) 
-            // console.log(MatchPassword) 
+
+        if(user[0].isActive === false){
+          const error = new Error("Your account is deactivate , Please Contact to the Admin")
+          error.statusCode = 400;
+          throw error;
+        }
+        
+        const MatchPassword = await bcrypt.compare(password, user[0].password) 
+
         //match password
         if(!MatchPassword){
-            // console.log(MatchPassword)
-            const error = new Error("password did not match")
+            const error = new Error("Wrong Password")
             error.statuscode = 400
             throw error 
         }
@@ -50,10 +57,9 @@ exports.login = async(req,res,next)=>{
 
         const token = jwt.sign({id:user[0]._id, role:user[0].role, name:user[0].name}, 'this-is-my-secret',
         {expiresIn:'30d'})
-        // console.log(token)
 
         res.status(200).json({
-            message:"success",
+            message:"Successfully Login",
             token
         })
         
@@ -66,7 +72,6 @@ exports.login = async(req,res,next)=>{
 exports.getUsers = async(req,res,next)=>{
     try {
     //   const users = await User.find({ role: { $ne: 'admin' } }) //iska matlab not equal to admin matlab admin nhi aayega isme
-    //  console.log(users)
 
     const users = await User.find()
   
@@ -86,26 +91,40 @@ exports.getUsers = async(req,res,next)=>{
   }
 
 
-  exports.deactivateUser = async(req,res,next)=>{
+  exports.deactivateUser = async(req,res,next) => {
     try{
-        const {id} = req.params;
-        const user = await User.findById(id);
-
-        if(!users){
-            const error = new Error('Users not found');
-            error.statusCode = 404 ;
-            throw error
-        }
-
-        user.isActive = false
-        // await user.save()
-        console.log(user)
-
-        res.status(200).json({
-            user
-        })
-
+      const {id} = req.params ;
+      const user = await User.findById(id) ;
+       if(!user){
+         const error = new Error('Users not found');
+         error.statusCode = 404 ;
+         throw error
+     }
+    user.isActive = false ;
+    await user.save()
+  res.status(200).json({
+    user
+  })
     }catch(error){
-
+  
     }
   }
+
+  exports.activateUser = async(req,res,next) => {
+    try{
+      const {id} = req.params ;
+      const user = await User.findById(id) ;
+       if(!user){
+         const error = new Error('Users not found');
+         error.statusCode = 404 ;
+         throw error
+     }
+    user.isActive = true ;
+    await user.save()
+  res.status(200).json({
+    user
+  })
+    }catch(error){
+  
+    }
+}

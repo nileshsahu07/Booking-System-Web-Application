@@ -14,7 +14,7 @@ export const fetchService = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const data = await axios.get(
-        `${import.meta.env.VITE_API_URL}/get_allservices`
+        `${import.meta.env.VITE_API_URL}/get_allServices`
       );
 
       return data.data.services;
@@ -33,8 +33,7 @@ export const createServices = createAsyncThunk("/createServices",async(fromData,
             }
           }
       )
-      console.log(res)  
-      return res; 
+      return res;   
   }
   catch(error){
       rejectWithvalue(error)
@@ -77,11 +76,13 @@ const serviceSlice = createSlice({
     builder
       .addCase(fetchService.pending, (state) => {
         state.loading = true;
+        toast.success("continue....",{
+          duration:"1000"
+        })
       })
       .addCase(fetchService.fulfilled, (state, action) => {
         state.loading = false;
         state.services = action.payload;
-        // console.log(state.services)
       })
       .addCase(fetchService.rejected, (state, action) => {
         state.error = action.payload;
@@ -101,8 +102,9 @@ const serviceSlice = createSlice({
       .addCase(updateService.pending,(state)=>{
         state.loading = true;
       })
-      .addCase(updateService.fulfilled,(state)=>{
-        state.loading = false;
+      .addCase(updateService.fulfilled,(state,action)=>{
+          state.loading = false;
+          console.log(action.payload)
         toast.success("Service Updated Successfully")
       })
       .addCase(updateService.rejected , (state,action)=>{

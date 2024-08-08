@@ -20,7 +20,7 @@ function Users() {
     } else {
       await dispatch(activateUser(user._id));
     }
-    dispatch(fetchUsers());
+    await dispatch(fetchUsers());
   };
 
   const columns = [
@@ -64,8 +64,8 @@ function Users() {
       <div className="m-8">
         <div className="flex justify-between mb-4">
           <div>
-            <h2>Users</h2>
-            <p>Total Active Users: {users.filter((user) => user.isActive).length}</p>
+            <h2 className='text-3xl font-bold '>Users</h2>
+            <p className='text-xl'>Total Active Users: {users.filter((user) => user.isActive).length}</p>
           </div>
         
         </div>

@@ -40,7 +40,7 @@ function DashServices() {
 
     const handleDelete = async(id)=>{
         await dispatch(deleteService(id))
-        dispatch(fetchService())
+        await dispatch(fetchService())
     }
 
     const onSubmit = async(data)=>{
@@ -50,7 +50,7 @@ function DashServices() {
             await dispatch(createServices(data))
         }
         handleClose();
-        dispatch(fetchService());
+        await dispatch(fetchService());
     }
 
 
@@ -89,13 +89,13 @@ function DashServices() {
           },
       ];
 
-    return ( 
+    return (    
         <>
        <div className='m-8'>
        <div className='flex justify-between mb-4'>
         <div>
-               <h2>Services</h2>
-               <p>Total Active Services : {services.length} </p>
+               <h2 className='text-3xl font-bold '>Services</h2>
+               <p className='text-xl'>Total Active Services : {services.length} </p>
         </div>
         <button onClick={handleOpen} className='bg-green-500 h-10 text-white px-4 py-2 rounded-md shadow-sm hover:bg-green-600 transition-all'>Add New</button>
       </div>

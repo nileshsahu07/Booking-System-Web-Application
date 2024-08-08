@@ -19,7 +19,7 @@ export const login = createAsyncThunk('/login',async ( formData, {rejectWithValu
         })
         return data;
     }catch(error){
-        rejectWithValue(error)
+        return rejectWithValue(error)
     }
 })
 
@@ -58,15 +58,17 @@ const loginSlice = createSlice({
             localStorage.setItem('token',token)
             localStorage.setItem('role',role)
 
-            toast.success("login successful",{
+            toast.success(action.payload.data.message,{
                 position:"top-center",
-                duration:"1500"
             })
 
         }).addCase(login.rejected,(state,action)=>{
-            state.error = action.payload 
+            // state.error = action.payload 
             state.loading = false
-            toast.error("login failed")
+            toast.error(action.payload.response.data.error,{
+                 position:"top-center",
+                 duration:"1500"
+            })
         })
     }
 })

@@ -9,7 +9,7 @@ router.post("/signup",userController.signup)
 router.post("/login",userController.login)
 router.get("/all_users",protect, admin, userController.getUsers)
 router.get("/deactivate_user/:id",protect,admin, userController.deactivateUser)
-
+router.get('/activate_user/:id', protect , admin, userController.activateUser)
 
 
 module.exports = router
