@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import {useDispatch} from "react-redux"
 import {SignUp} from "../../redux/slices/SignupSlice"
@@ -59,9 +59,16 @@ export default function Example() {
   
   const dispatch = useDispatch();
 
+  const navigate = useNavigate()
+
   const onSubmit = async(data)=>{
 
-    await dispatch(SignUp(data));
+    if(data){
+      await dispatch(SignUp(data))
+      navigate("/login")
+    }else{
+      navigate("/signup")
+    }
 
   }
 

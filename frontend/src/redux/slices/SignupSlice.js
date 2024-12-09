@@ -8,10 +8,11 @@ const initialState = {
     error:null,
 }
 
-export const SignUp = createAsyncThunk("/signUp", async (formData, {rejectWithValue})=>{
+export const SignUp = createAsyncThunk("/signup", async (formData, {rejectWithValue})=>{
     try{
-        const res = await axios.post(`${import.meta.env.VITE_API_URL}/signup`,
-            formData
+        const res = await axios.post(`${import.meta.env.VITE_API_URL}/signup`,{
+            ...formData
+        }
         )
         return res
     }

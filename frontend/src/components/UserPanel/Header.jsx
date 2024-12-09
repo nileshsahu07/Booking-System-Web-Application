@@ -28,7 +28,8 @@ const navigation = [
   { name: 'Home', url: '/', current: false },
   { name: 'Services', url: '/services', current: false },
   { name: 'Contact Us', url: '/contact', current: false },
-  { name: 'Bookings', url: '/your_booking', current: false },
+  // It is not completed yet
+  // { name: 'Bookings', url: '/your_booking', current: false },
   { name: 'Log Out', url:'/login', action: ()=>{
     dispatch(logout());
     navigate("/login");

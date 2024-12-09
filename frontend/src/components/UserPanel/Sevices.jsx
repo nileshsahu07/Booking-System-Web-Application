@@ -12,6 +12,7 @@ import {useForm} from "react-hook-form"
 function Services() {
 
     const servicesForCustomer = useSelector((state)=>state.service.services);
+    
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(fetchService())

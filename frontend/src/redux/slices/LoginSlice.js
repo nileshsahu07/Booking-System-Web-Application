@@ -60,6 +60,7 @@ const loginSlice = createSlice({
 
             toast.success(action.payload.data.message,{
                 position:"top-center",
+                duration:"1000",
             })
 
         }).addCase(login.rejected,(state,action)=>{

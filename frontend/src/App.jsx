@@ -10,7 +10,7 @@ import ContactUs from "./components/UserPanel/ContactUs"
 import DashServices from "./components/Dashboard/DashServices"
 import Users from "./components/Dashboard/Users"
 import Statistics from "./components/Dashboard/Statistics"
-import Bookings from "./components/Dashboard/Bookings"
+// import Bookings from "./components/Dashboard/Bookings"
 import UserBookings from "./components/UserPanel/UserBookings"
 function App() {
 
@@ -27,7 +27,8 @@ function App() {
           <Route index element={<Statistics/>}/>
             <Route path="dashServices" element={<DashServices/>}/>
             <Route path='users' element={<Users/>}/>
-            <Route path="bookings" element={<Bookings/>}/>
+            {/* It is not completed yet */}
+            {/* <Route path="bookings" element={<Bookings/>}/> */} 
           </Route>
         </Route>
 

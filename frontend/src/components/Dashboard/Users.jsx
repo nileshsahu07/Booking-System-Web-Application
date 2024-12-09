@@ -12,7 +12,8 @@ function Users() {
 
   useEffect(() => {
     dispatch(fetchUsers());
-  }, [dispatch]);
+
+  },[]);
 
   const handleDeactivate = async (user) => {
     if (user.isActive) {

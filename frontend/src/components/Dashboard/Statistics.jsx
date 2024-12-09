@@ -16,7 +16,7 @@ const dispatch = useDispatch()
   useEffect(()=>{
     dispatch(fetchService())
     dispatch(fetchUsers())
-  })
+  },[])
  
   const pieData = [
     { name: 'Active Users', value: activeUsersCount },
