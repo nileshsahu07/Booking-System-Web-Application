@@ -44,3 +44,26 @@ exports.getBooking = async(req,res,next)=>{
     }
     
 }
+
+exports.getUserBookings = async (req,res,next)=>{
+    try {
+        const id = req.userId
+        // console.log(id)
+        const userBookings = await Booking.find({userId:id}).populate('userId')
+        // console.log(userBookings)
+
+        if(!userBookings){
+            const error = new Error("your booking is not found")
+            error.statusCode = 400 
+            throw error
+        }
+
+        res.status(200).json({
+            message:"here is your booking",
+            userBookings
+
+        })
+    } catch (error) {
+        next(error)
+    }
+}

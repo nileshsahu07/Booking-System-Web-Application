@@ -17,7 +17,7 @@ export const SignUp = createAsyncThunk("/signup", async (formData, {rejectWithVa
         return res
     }
     catch(error){
-       return rejectWithValue(error)
+        return rejectWithValue(error.response ? error.response.data : error.message);
     }
 })
 

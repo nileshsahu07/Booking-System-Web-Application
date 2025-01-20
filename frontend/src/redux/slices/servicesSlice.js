@@ -19,12 +19,12 @@ export const fetchService = createAsyncThunk(
 
       return data.data.services;
     } catch (error) {
-      rejectWithValue(error.data.message);
+      return rejectWithValue(error.response ? error.response.data : error.message);
     }
   }
 );
 
-export const createServices = createAsyncThunk("/createServices",async(fromData,{rejectWithvalue})=>{
+export const createServices = createAsyncThunk("/createServices",async(fromData,{rejectWithValue})=>{
   try{
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/create_services`,
           fromData ,{
@@ -36,7 +36,7 @@ export const createServices = createAsyncThunk("/createServices",async(fromData,
       return res;   
   }
   catch(error){
-      rejectWithvalue(error)
+     return rejectWithValue(error.response ? error.response.data : error.message);
   }
 })
 
@@ -50,7 +50,7 @@ export const deleteService =  createAsyncThunk("/deleteService", async(id, {reje
       }
     )
   }catch(error){
-    rejectWithValue(error)
+    return rejectWithValue(error.response ? error.response.data : error.message);
   }
 })
 
@@ -65,7 +65,7 @@ export const updateService = createAsyncThunk("/updateService" , async({id,data}
           }
         )
     }catch(error){
-      rejectWithValue(error)
+      return rejectWithValue(error.response ? error.response.data : error.message);
     }
 })
 

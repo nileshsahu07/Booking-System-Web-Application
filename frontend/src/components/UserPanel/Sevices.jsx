@@ -43,10 +43,10 @@ function Services() {
     return ( 
         <>
             <Header cardData={servicesForCustomer}/>
-            <div>
+            <>
             {
-                servicesForCustomer.map((items)=>(
-                    <>
+                servicesForCustomer.map((items,index)=>(
+                    <div key={index}>
                     <img
                      alt=""
                      src="https://media.istockphoto.com/id/1973194130/photo/professional-hairdressers-serving-clients-in-salon.webp?b=1&s=170667a&w=0&k=20&c=rXHxeoMBgCFYtQRqfYRnx-SNxoBJjMMrByw-Z4p6a2Y="
@@ -70,7 +70,7 @@ function Services() {
                         </div>
                     </div>
                     </div>
-                    </>
+                    </div>
                   
                 ))
             }
@@ -120,7 +120,7 @@ function Services() {
           </div>
         </Box>
       </Modal>
-      </div>
+      </>
       
             
             <Footer/>

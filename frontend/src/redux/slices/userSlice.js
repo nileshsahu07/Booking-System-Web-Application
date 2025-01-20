@@ -23,7 +23,7 @@ const initialState = {
         if (!error.response) {
             throw error;
           }
-          return rejectWithValue(error.response.data);
+          return rejectWithValue(error.response ? error.response.data : error.message);
     }
    
 })
@@ -38,7 +38,7 @@ export const DeactivateUser = createAsyncThunk('/users/deactivateUser',async(id,
         })
         return response.data;
     }catch(error){
-        rejectWithValue(error)
+        return rejectWithValue(error.response ? error.response.data : error.message);
     }
 })
 
@@ -53,7 +53,7 @@ export const activateUser = createAsyncThunk('/users/activateUser', async(id, {r
       });
       return response.data;
     }catch(error){
-        rejectWithValue(error)
+        return rejectWithValue(error.response ? error.response.data : error.message);
     }
   })
 

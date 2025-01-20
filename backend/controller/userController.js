@@ -5,19 +5,44 @@ const jwt = require("jsonwebtoken")
 exports.signup = async(req,res,next)=>{
     try{
         const {name,email,password,role} = req.body
+        // console.log(req.body)
 
-        const existingUser = await User.find({email})
+        if ([name, email, password].some(
+          (field) => ( field?.trim() === "" )
+      )) {
+        const error = new Error('All field is required')
+            error.statuscode = 400
+            throw error 
+      }
 
-        // if(existingUser){
-        //     const error = new Error('You are already registered with this email, Please try again with new')
-        //     error.statuscode = 400
-        //     throw error 
-        // }
+      const existingUser = await User.findOne({
+        $or: [{name},{email}]
+      })
 
-        const user = await User.create(req.body)
+        if(existingUser){
+            const error = new Error('You are already registered with this email, Please try again with new')
+            error.statuscode = 400
+            throw error 
+        }
+
+        const user = await User.create({
+          name,
+          email,
+          password,
+          role
+        })
+
+        const createdUser = await User.findById(user._id);
+
+        if(!createdUser){
+            const error = new Error('Registration failed, please try again')
+            error.statuscode = 400
+            throw error 
+        }
 
         res.status(201).json({
-            user
+            user,
+            message: "Registration successfully"
         })
     }
     catch(error){
@@ -106,7 +131,7 @@ exports.getUsers = async(req,res,next)=>{
     user
   })
     }catch(error){
-  
+      next(error)
     }
   }
 
@@ -125,6 +150,6 @@ exports.getUsers = async(req,res,next)=>{
     user
   })
     }catch(error){
-  
+      next(error)
     }
 }

@@ -14,10 +14,10 @@ const initialState = {
 
 export const login = createAsyncThunk('/login',async ( formData, {rejectWithValue})=>{
     try{
-        const data = await axios.post(`${import.meta.env.VITE_API_URL}/login` ,{
+        const res = await axios.post(`${import.meta.env.VITE_API_URL}/login` ,{
             ...formData
         })
-        return data;
+        return res.data;
     }catch(error){
         return rejectWithValue(error)
     }
@@ -42,14 +42,14 @@ const loginSlice = createSlice({
 
         }).addCase(login.fulfilled,(state,action)=>{
             const data = action.payload
-            // console.log(data)
-            const token = data.data.token;
+            // console.log(action.payload.data)
+            const token = data.token;
             state.loading = false;
             state.token = token;
            
             const decoded = jwtDecode(token)
-            // console.log(decoded)
-            const {role,name} = decoded
+            console.log(decoded)
+            const {role,name,id} = decoded
             state.name = name
             // console.log(role)
             state.role = role
@@ -57,8 +57,9 @@ const loginSlice = createSlice({
             localStorage.setItem('name',name)
             localStorage.setItem('token',token)
             localStorage.setItem('role',role)
+            localStorage.setItem('userId',id)
 
-            toast.success(action.payload.data.message,{
+            toast.success(action.payload.message,{
                 position:"top-center",
                 duration:"1000",
             })
@@ -66,7 +67,7 @@ const loginSlice = createSlice({
         }).addCase(login.rejected,(state,action)=>{
             // state.error = action.payload 
             state.loading = false
-            toast.error(action.payload.response.data.error,{
+            toast.error(action.payload.response.error,{
                  position:"top-center",
                  duration:"1500"
             })

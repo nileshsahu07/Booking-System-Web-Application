@@ -10,7 +10,7 @@ import ContactUs from "./components/UserPanel/ContactUs"
 import DashServices from "./components/Dashboard/DashServices"
 import Users from "./components/Dashboard/Users"
 import Statistics from "./components/Dashboard/Statistics"
-// import Bookings from "./components/Dashboard/Bookings"
+import Bookings from "./components/Dashboard/Bookings"
 import UserBookings from "./components/UserPanel/UserBookings"
 function App() {
 
@@ -27,8 +27,7 @@ function App() {
           <Route index element={<Statistics/>}/>
             <Route path="dashServices" element={<DashServices/>}/>
             <Route path='users' element={<Users/>}/>
-            {/* It is not completed yet */}
-            {/* <Route path="bookings" element={<Bookings/>}/> */} 
+            <Route path="bookings" element={<Bookings/>}/> 
           </Route>
         </Route>
 
@@ -36,7 +35,7 @@ function App() {
           <Route path="/" element={<Homepage/>}></Route>
           <Route path="/services" element={<Services/>}></Route>
           <Route path="/contact" element={<ContactUs/>}></Route>
-          <Route path="/your_booking" element={<UserBookings/>}></Route>
+          <Route path="/userBookings" element={<UserBookings/>}></Route>
         </Route>
       </Routes>
     </>

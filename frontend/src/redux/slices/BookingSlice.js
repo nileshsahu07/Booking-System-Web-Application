@@ -24,23 +24,6 @@ export const getBooking = createAsyncThunk("/getBookings" , async(_, {rejectWith
     }
 });
 
-// export const getUserBooking = createAsyncThunk("/getUserBookings", async(id, {rejectWithValue})=>{
-//     try{
-//         const token = localStorage.getItem('token')
-//         const res = axios.get(`${import.meta.env.VITE_API_URL}/bookings/${id}`,
-//             {
-//                 headers:{
-//                     Authorization: `Bearer${token}`
-//                 }
-//             }
-//         )
-//         console.log(res)
-//         return res
-//     }catch(error){
-//       return rejectWithValue(error)
-//     }
-// })
-
 export const createBooking = createAsyncThunk("/createBooking", async (formData,{rejectWithValue})=>{
     try{
          const res = await axios.post(`${import.meta.env.VITE_API_URL}/create_booking`,
@@ -72,7 +55,7 @@ const bookingSlice = createSlice({
         })
         .addCase(getBooking.fulfilled,(state,action)=>{
             state.loading = false;
-            console.log(action.payload)
+            console.log(action.payload.booking)
             state.Bookings = action.payload.booking
             toast.success(action.payload.message,{
                 position:"top-center",
@@ -106,27 +89,6 @@ const bookingSlice = createSlice({
                 duration:"1500"
            })
         })
-        // .addCase(getUserBooking.pending,(state)=>{
-        //     state.loading = true;
-        //     state.error = null;
-        // })
-        // .addCase(getUserBooking.fulfilled,(state,action)=>{
-        //     state.loading = false;
-        //     console.log(action.payload)
-        //     state.Bookings = action.payload.booking
-        //     toast.success(action.payload.message,{
-        //         position:"top-center",
-        //         duration:"1500"
-        //    })
-        // })
-        // .addCase(getUserBooking.rejected,(state,action)=>{
-        //     state.loading  = false;
-        //     state.error = action.payload
-        //     toast.error(action.payload.message,{
-        //         position:"top-center",
-        //         duration:"1500"
-        //    })
-        // })
     }
 })
 
